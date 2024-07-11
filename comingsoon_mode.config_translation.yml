@@ -1,0 +1,5 @@
+comingsoon_mode.settings_form:
+  title: 'Coming Soon Mode Settings'
+  base_route_name: comingsoon_mode.settings_form
+  names:
+    - comingsoon_mode.settings

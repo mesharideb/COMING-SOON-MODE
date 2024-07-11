@@ -1,0 +1,20 @@
+langcode: en
+comingsoon_ckeck: 0
+display_logo: 0
+display_counter: 0
+background_image_ckeck: 0
+display_social_media_links: 0
+title: ''
+message: 
+  value: 'Coming Soon'
+  format: restricted_html
+logo: ''
+countdown_time:  ''
+background_image:  ''
+background_color: ''
+twitter: ''
+facebook: ''
+instagram: ''
+linkedin: ''
+email: ''
+phone: ''

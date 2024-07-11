@@ -1,0 +1,34 @@
+# Schema for the configuration files of the comingsoon mode module.
+comingsoon_mode.settings:
+  type: config_object
+  label: 'Coming Soon Mode settings'
+  mapping:
+    title:
+      type: text
+      label: 'Title'
+    message:
+      type: text_format
+      label: 'Message'
+    twitter:
+      type: label
+      label: 'Twitter'
+    facebook:
+      type: label
+      label: 'Facebook'
+    instagram:
+      type: label
+      label: 'Instagram'
+    linkedin:
+      type: label
+      label: 'Linkedin'
+    email:
+      type: label
+      label: 'Email'
+    phone:
+      type: label
+      label: 'Phone'    
+
+
+    
+
+

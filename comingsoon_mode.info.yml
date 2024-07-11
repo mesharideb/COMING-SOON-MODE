@@ -1,0 +1,14 @@
+name: Coming Soon Mode
+type: module
+description: provides an easy setup for a "coming soon" landing page. Ideal for anonymous users, it enables a temporary site mode that restricts access based on chosen roles while showcasing a countdown timer and customizable content.
+package: maintenance
+core_version_requirement: ^9 || ^10 || ^11
+
+configure: comingsoon_mode.settings_form
+'interface translation project': comingsoon_mode
+'interface translation server pattern': modules/contrib/comingsoon_mode/translations/%language.po
+
+# Information added by Drupal.org packaging script on 2024-07-10
+version: '1.3.8-alpha1'
+project: 'comingsoon_mode'
+datestamp: 1720615199

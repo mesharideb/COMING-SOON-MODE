@@ -1,0 +1,10 @@
+administer comingsoon mode configuration:
+  title: 'Administer Coming Soon Mode configuration'
+  description: 'Configure Coming Soon Mode.'
+  restrict access: true
+
+access website in comingsoon mode:
+  title: 'Access website in Coming Soon Mode'
+  description: 'Access website in Coming Soon Mode.'
+  restrict access: true
+    

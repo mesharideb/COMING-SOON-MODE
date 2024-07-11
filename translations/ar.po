@@ -1,0 +1,65 @@
+msgid "Put site into coming soon mode."
+msgstr "وضع الموقع في وضع "قريباً"."
+
+msgid "Display site logo."
+msgstr "عرض شعار الموقع."
+
+msgid "Display counter."
+msgstr "عرض العداد."
+
+msgid "Enable background image"
+msgstr "تفعيل صورة الخلفية."
+
+msgid "Display social media links."
+msgstr "عرض وسائل التواصل الاجتماعي."
+
+msgid "Title"
+msgstr "العنوان."
+
+msgid "Message"
+msgstr "الرسالة."
+
+msgid "Countdown Time"
+msgstr "وقت العد التنازلي."
+
+msgid "Background image"
+msgstr "صورة الخلفية."
+
+msgid "Background color"
+msgstr "لون الخلفية."
+
+msgid "Twitter"
+msgstr "تويتر."
+
+msgid "Facebook"
+msgstr "فيسبوك."
+
+msgid "Instagram"
+msgstr "إنستغرام."
+
+msgid "Linkedin"
+msgstr "لينكدإن."
+
+msgid "Email"
+msgstr "البريد الإلكتروني."
+
+msgid "Phone"
+msgstr "الهاتف."
+
+msgid "Days"
+msgstr "أيام"
+
+msgid "Hours"
+msgstr "ساعات"
+
+msgid "Minutes"
+msgstr "دقائق"
+
+msgid "Seconds"
+msgstr "ثواني"
+
+msgid "Coming Soon"
+msgstr "قريباً"
+
+msgid "you are not allowed to access website in comingsoon mode'"
+msgstr "لا يسمح لك بالوصول إلى الموقع في وضع "قريباً."

@@ -1,0 +1,6 @@
+comingsoon_mode.settings_form:
+  title: 'Coming Soon Mode'
+  description: 'Configure Coming Soon Mode.'
+  parent: system.admin_config_system
+  route_name: comingsoon_mode.settings_form
+  weight: 10
