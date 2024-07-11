@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+
+/**
+ * @file
+ * Primary module hooks for comingsoon_mode module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function comingsoon_mode_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.comingsoon_mode':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module provides an easy setup for a "coming soon" landing page. Ideal for anonymous users, it enables a temporary site mode that restricts access based on chosen roles while showcasing a countdown timer and customizable content.') . '</p>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<p>' . t('To configure the module, go to <a href=":url">Configuration page</a>.', [':url' => Url::fromRoute('comingsoon_mode.settings_form')->toString()]) . '</p>';
+      return $output;
+
+    break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function comingsoon_mode_theme() {
+  $module_path = \Drupal::service('module_handler')->getModule('comingsoon_mode')->getPath();
+  $theme_path = $module_path . '/templates';
+
+  return [
+    'comingsoon' => [
+      'variables' => ['items' => NULL],
+      'template' => 'comingsoon',
+      'theme path' => $theme_path,
+
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function comingsoon_mode_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name == 'comingsoon.page') {
+    $suggestions[] = 'comingsoon';
+  }
+}
+
+/**
+ * Process variables .
+ *
+ * @see comingsoon.html.twig
+ */
+function template_preprocess_comingsoon(array &$variables) {
+  $config = \Drupal::config('comingsoon_mode.settings');
+  $stream = \Drupal::service('stream_wrapper_manager');
+
+  $data = [];
+  $backgroundImage = $config->get('background_image') ? $config->get('background_image') : '';
+  $backgroundImageFile = $backgroundImage ? File::load($backgroundImage[0]) : '';
+  $backgroundImageUrl = $backgroundImageFile ? $stream->getViaUri($backgroundImageFile->getFileUri())->getExternalUrl() : '';
+
+  $title = $config->get('title') ? $config->get('title') : '';
+  $messageDesc = $config->get('message') ? $config->get('message')['value'] : '';
+
+  $countdownTime = $config->get('countdown_time') ? $config->get('countdown_time') : 0;
+  $countdownDate = $countdownTime ? date('Y/m/d', $countdownTime) : '';
+
+  $bgColor = $config->get('background_color') ? $config->get('background_color') : '';
+  $backgroundImageCkeck = $config->get('background_image_ckeck') ? $config->get('background_image_ckeck') : 0;
+  $displayCounter = $config->get('display_counter') ? $config->get('display_counter') : 0;
+
+  $displaySocialMediaLinks = $config->get('display_social_media_links') ? $config->get('display_social_media_links') : 0;
+  $twitter = $config->get('twitter') ? $config->get('twitter') : '';
+  $facebook = $config->get('facebook') ? $config->get('facebook') : '';
+  $instagram = $config->get('instagram') ? $config->get('instagram') : '';
+  $linkedin = $config->get('linkedin') ? $config->get('linkedin') : '';
+  $email = $config->get('email') ? $config->get('email') : '';
+  $phone = $config->get('phone') ? $config->get('phone') : '';
+
+  $displaySiteLogo = $config->get('display_logo') ? $config->get('display_logo') : 0;
+  $logo = \Drupal::theme()->getActiveTheme()->getLogo();
+  $logoUrl = $logo ? \Drupal::service('file_url_generator')->generateAbsoluteString($logo) : '';
+
+  $data = [
+    'title' => $title,
+    'message' => $messageDesc,
+    'countDownDate' => $countdownDate,
+    'ImageBg' => $backgroundImageUrl,
+    'backgroundColor' => $bgColor,
+    'backgroundImageCkeck' => $backgroundImageCkeck,
+    'displayCounter' => $displayCounter,
+    'displaySocialMediaLinks' => $displaySocialMediaLinks,
+    'twitter' => $twitter,
+    'facebook' => $facebook,
+    'instagram' => $instagram,
+    'linkedin' => $linkedin,
+    'email' => $email,
+    'phone' => $phone,
+    'displaySiteLogo' => $displaySiteLogo,
+    'logo' => $logoUrl,
+  ];
+
+  $variables['data'] = $data;
+  $variables['#attached']['library'][] = 'comingsoon_mode/countdown';
+  $variables['#cache']['tags'][] = 'config:comingsoon_mode.settings';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function comingsoon_mode_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'user_login_form') {
+    $form['#validate'][] = 'comingsoon_mode_login_form_validate';
+  }
+}
+
+/**
+ * Function comingsoon_mode_login_form_validate.
+ */
+function comingsoon_mode_login_form_validate(array &$form, FormStateInterface $form_state) {
+  $config = \Drupal::config('comingsoon_mode.settings');
+  $comingSoonCheck = $config->get('comingsoon_ckeck') ? $config->get('comingsoon_ckeck') : 0;
+  $userInputs = $form_state->getUserInput();
+  $username = $userInputs['name'];
+  $user = user_load_by_name($username);
+  $haveAccess = $user && $user->hasPermission('access website in comingsoon mode');
+  if ($comingSoonCheck && !$haveAccess) {
+    $form_state->setErrorByName('name', t('you are not allowed to access website in Coming Soon Mode'));
+  }
+}

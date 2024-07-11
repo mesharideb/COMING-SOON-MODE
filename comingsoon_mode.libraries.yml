@@ -1,0 +1,18 @@
+countdown:
+  css: 
+   theme:
+    assets/css/comingsoon_mode.css: {} 
+  js:
+    assets/js/comingsoon_mode.js: { }
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/once
+
+
+
+    
+  
+
+
+

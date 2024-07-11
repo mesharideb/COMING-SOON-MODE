@@ -1,0 +1,173 @@
+    {#
+    /**
+    * @file
+    * Default template for comingsoon page.
+    * Available variables:
+    * - data: An array of data for the coming soon page.
+    *   - data.title: The title of the coming soon page.
+    *   - data.message: The message of the coming soon page.
+    *   - data.countDownDate:  date with format: "Y/m/d".
+    *   - data.image: image .
+    *   - data.logo: logo of the website.
+    *   - data.backgroundColor: The background color of the coming soon page.
+    *   - data.backgroundImageCkeck: Background image checkbox Boolean.
+    *   - data.displayLogo: Display logo Boolean.
+    *   - data.displayCounter: Display counter Boolean.
+    *   - data.displaySocialMediaLinks: Display social media links Boolean.
+    *   - data.twitter: Twitter link.
+    *   - data.facebook: Facebook link.
+    *   - data.instagram: Instagram link.
+    *   - data.linkedin: LinkedIn link.
+    *   - data.email: Email Address.
+    *   - data.phone: Phone number.    
+#}
+
+{#
+ 	* variables
+ #}
+{% set backgroundColor = data.backgroundColor ? data.backgroundColor : '' %}
+{% set title = data.title %}
+{% set message = data.message %}
+{% set date = data.countDownDate %}
+{% set image = data.ImageBg %}
+{% set logo = data.logo %}
+
+
+{#
+ * check variables
+#}
+{% set backgroundImageCkeck = data.backgroundImageCkeck %}
+{% set backgroundImage = backgroundImageCkeck ? image : '' %}
+{% set displayCounter = data.displayCounter %}
+{% set displaySocialMediaLinks = data.displaySocialMediaLinks %}
+{% set displayLogo = data.displaySiteLogo %}
+
+{#
+    * display classes 
+#}
+{% set backgroundImageChecked = backgroundImage ? 'background-image:url(' ~ backgroundImage ~ ');' : '' %}
+{% set backgroundColorCheck = backgroundColor ? 'background-color:' ~ backgroundColor ~ ';' : '' %}
+{% set backgroundColorCheck = backgroundImageChecked ? '' : backgroundColorCheck %}
+{% set blendMode = backgroundImageChecked ? 'background-blend-mode:overlay;background-color:#00000052;' : '' %}
+{% set bodyClasses = 
+        'style=' ~
+        ' ' ~ backgroundImageChecked  ~ backgroundColorCheck ~ blendMode
+     %}
+
+{% set displayCounterCheck = displayCounter ? 'style=display:flex;' : 'style=display:none' %}
+{% set displaySocialMediaLinksCheck = displaySocialMediaLinks ? 'style=display:flex;' : 'style=display:none;' %}
+{% set displayLogoCheck = displayLogo ? 'style=display:flex;' : 'style=display:none;' %}
+
+{#
+        * Social media links   
+    #}
+{% set twitter = data.twitter ? data.twitter : '' %}
+{% set facebook = data.facebook ? data.facebook : '' %}
+{% set instagram = data.instagram ? data.instagram : '' %}
+{% set linkedin = data.linkedin  ? data.linkedin : '' %}
+{% set email = data.email  ? data.email : ''%}
+{% set phone = data.phone ? data.phone : '' %}
+
+
+<div class="comingsoon" {{ bodyClasses }}>
+	<div class="container">
+		<div class="s-header">
+			<div class="s-header__content">
+
+				<div class="s-header__logo">
+					<a class="logo" {{ displayLogoCheck }}>
+						<img src="{{ logo }}" alt="Homepage">
+					</a>
+				</div>
+				<div class="social-links" {{ displaySocialMediaLinksCheck }}>
+					<ul class="s-header__social">
+						{% if twitter %}
+							<li>
+								<a href="{{ twitter }}" target="_blank">
+									<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="48px" height="48px"><path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,6v12	c0,1.657-1.343,3-3,3H6c-1.657,0-3-1.343-3-3V6c0-1.657,1.343-3,3-3h12C19.657,3,21,4.343,21,6z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z"/></svg>
+								</a>
+							</li>
+						{% endif %}
+						{% if facebook %}
+							<li>
+								<a href="{{ facebook }}" target="_blank">
+									<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="48px" height="48px">    <path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"/></svg>
+								</a>
+							</li>
+						{% endif %}
+
+						{% if instagram %}
+							<li>
+								<a href="{{ instagram }}" target="_blank">
+									<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="48px" height="48px">    <path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"/></svg>
+								</a>
+							</li>
+						{% endif %}
+						{% if linkedin %}
+							<li>
+								<a href="{{ linkedin }}" target="_blank">
+									<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="48px" height="48px">    <path d="M19,3H5C3.895,3,3,3.895,3,5v14c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2V5C21,3.895,20.105,3,19,3z M9,17H6.477v-7H9 V17z M7.694,8.717c-0.771,0-1.286-0.514-1.286-1.2s0.514-1.2,1.371-1.2c0.771,0,1.286,0.514,1.286,1.2S8.551,8.717,7.694,8.717z M18,17h-2.442v-3.826c0-1.058-0.651-1.302-0.895-1.302s-1.058,0.163-1.058,1.302c0,0.163,0,3.826,0,3.826h-2.523v-7h2.523v0.977 C13.93,10.407,14.581,10,15.802,10C17.023,10,18,10.977,18,13.174V17z"/></svg>
+								</a>
+							</li>
+						{% endif %}
+						{% if email %}
+							<li>
+								<a href="mailto:{{ email }}">
+								<svg width="48px" height="48px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+  								<path fill-rule="evenodd" d="M7.172,11.334 L10.0016129,13.2687863 L12.73,11.387 L18.844647,17.4201015 C18.6835279,17.47198 18.5117028,17.5 18.3333333,17.5 L1.66666667,17.5 C1.44656147,17.5 1.23642159,17.4573334 1.04406658,17.3798199 L7.172,11.334 Z M20,6.376 L20,15.8333333 C20,16.0799316 19.9464441,16.3140212 19.8503291,16.5246054 L13.856,10.611 L20,6.376 Z M0,6.429 L6.042,10.561 L0.105700422,16.4187119 C0.0373700357,16.2365871 1.90096522e-15,16.0393243 1.77635684e-15,15.8333333 L0,6.429 Z M18.3333333,2.5 C19.2538079,2.5 20,3.24619208 20,4.16666667 L20,4.753 L9.99838709,11.6476481 L0,4.81 L1.77635684e-15,4.16666667 C1.66363121e-15,3.24619208 0.746192084,2.5 1.66666667,2.5 L18.3333333,2.5 Z"/></svg>
+								</a>
+							</li>
+						{% endif %}
+						{% if phone %}
+							<li>
+								<a href="tel:{{ phone }}">
+									<svg fill="#000000" width="48px" height="48px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M 8.65625 3 C 8.132813 3 7.617188 3.1875 7.1875 3.53125 L 7.125 3.5625 L 7.09375 3.59375 L 3.96875 6.8125 L 4 6.84375 C 3.035156 7.734375 2.738281 9.066406 3.15625 10.21875 C 3.160156 10.226563 3.152344 10.242188 3.15625 10.25 C 4.003906 12.675781 6.171875 17.359375 10.40625 21.59375 C 14.65625 25.84375 19.402344 27.925781 21.75 28.84375 L 21.78125 28.84375 C 22.996094 29.25 24.3125 28.960938 25.25 28.15625 L 28.40625 25 C 29.234375 24.171875 29.234375 22.734375 28.40625 21.90625 L 24.34375 17.84375 L 24.3125 17.78125 C 23.484375 16.953125 22.015625 16.953125 21.1875 17.78125 L 19.1875 19.78125 C 18.464844 19.433594 16.742188 18.542969 15.09375 16.96875 C 13.457031 15.40625 12.621094 13.609375 12.3125 12.90625 L 14.3125 10.90625 C 15.152344 10.066406 15.167969 8.667969 14.28125 7.84375 L 14.3125 7.8125 L 14.21875 7.71875 L 10.21875 3.59375 L 10.1875 3.5625 L 10.125 3.53125 C 9.695313 3.1875 9.179688 3 8.65625 3 Z M 8.65625 5 C 8.730469 5 8.804688 5.035156 8.875 5.09375 L 12.875 9.1875 L 12.96875 9.28125 C 12.960938 9.273438 13.027344 9.378906 12.90625 9.5 L 10.40625 12 L 9.9375 12.4375 L 10.15625 13.0625 C 10.15625 13.0625 11.304688 16.136719 13.71875 18.4375 L 13.9375 18.625 C 16.261719 20.746094 19 21.90625 19 21.90625 L 19.625 22.1875 L 22.59375 19.21875 C 22.765625 19.046875 22.734375 19.046875 22.90625 19.21875 L 27 23.3125 C 27.171875 23.484375 27.171875 23.421875 27 23.59375 L 23.9375 26.65625 C 23.476563 27.050781 22.988281 27.132813 22.40625 26.9375 C 20.140625 26.046875 15.738281 24.113281 11.8125 20.1875 C 7.855469 16.230469 5.789063 11.742188 5.03125 9.5625 C 4.878906 9.15625 4.988281 8.554688 5.34375 8.25 L 5.40625 8.1875 L 8.4375 5.09375 C 8.507813 5.035156 8.582031 5 8.65625 5 Z"/></svg>
+								</a>
+							</li>
+						{% endif %}
+					</ul>
+
+				</div>
+			</div>
+		</div>
+
+
+		<section id="intro" class="s-intro">
+			<div class="s-intro__bg"></div>
+			<div class="s-intro__content">
+				<div class="column lg-12">
+
+					<div class="counter" {{ displayCounterCheck }}>
+						<div class="countdown" data-count="{{ date }}">
+							<div class="counter__time">
+								<span class="ss-days">%d</span>
+								<h3 class="counter-text">{{"Days"|t}}</h3>
+							</div>
+							<div class="counter__time">
+								<span class="ss-hours">%h</span>
+								<h3 class="counter-text">{{"Hours"|t}}</h3>
+							</div>
+							<div class="counter__time minutes">
+								<span class="ss-minutes">%m</span>
+								<h3 class="counter-text">{{"Minutes"|t}}</h3>
+							</div>
+							<div class="counter__time">
+								<span class="ss-seconds">%s</span>
+								<h3 class="counter-text">{{"Seconds"|t}}</h3>
+							</div>
+						</div>
+					</div>
+
+					<div class="s-intro__content-bottom">
+						<h1 class="s-intro__content-title">{{ title }}</h1>
+						<p>
+							{{ message|striptags }}
+						</p>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+

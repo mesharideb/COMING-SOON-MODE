@@ -1,0 +1,16 @@
+comingsoon_mode.settings_form:
+  path: '/admin/config/system/comingsoon_mode'
+  defaults:
+    _title: 'Coming Soon Mode settings'
+    _form: 'Drupal\comingsoon_mode\Form\SettingsForm'
+  requirements:
+    _permission: 'administer comingsoon mode configuration'
+
+comingsoon.page:
+  path: 'coming-soon'
+  defaults:
+    _title: 'Coming Soon'
+    _controller: '\Drupal\comingsoon_mode\Controller\ComingsoonController::build'
+  requirements:
+    _permission: 'access content'
+  
