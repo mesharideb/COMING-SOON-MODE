@@ -36,3 +36,7 @@ Current maintainers:
 * Meshari Aldebas (mesharideb) - https://www.drupal.org/u/mesharideb
 
 
+-- Project page --
+
+https://www.drupal.org/project/comingsoon_mode
+
